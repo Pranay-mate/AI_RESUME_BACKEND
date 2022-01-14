@@ -75,7 +75,7 @@ app.get('/fetch-pdf', (req, res) => {
 app.use('/score', dashboardRouter);
 app.use('/profile', profileRoutes);
 app.use("/user", userRouter);
-app.use("/skills", skillRouter);
+app.use("https://pranay-mate.github.io/skills", skillRouter);
 app.use("/education", educationRouter);
 app.use("/interests", interestRouter);
 app.use("/languages", languageRouter);
