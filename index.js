@@ -72,16 +72,16 @@ app.get('/fetch-pdf', (req, res) => {
   res.sendFile('/result.pdf', { root: '.' });
 })
 
-app.use('/score', dashboardRouter);
-app.use('/profile', profileRoutes);
-app.use("/user", userRouter);
-app.use("https://pranay-mate.github.io/skills", skillRouter);
-app.use("/education", educationRouter);
-app.use("/interests", interestRouter);
-app.use("/languages", languageRouter);
-app.use("/experience", experienceRouter);
-app.use("/projects", projectRouter);
-app.use("/certificates", certificateRouter);
+app.use('/Final_year/score', dashboardRouter);
+app.use('/Final_year/profile', profileRoutes);
+app.use("/Final_year/user", userRouter);
+app.use("/Final_year/skills", skillRouter);
+app.use("/Final_year/education", educationRouter);
+app.use("/Final_year/interests", interestRouter);
+app.use("/Final_year/languages", languageRouter);
+app.use("/Final_year/experience", experienceRouter);
+app.use("/Final_year/projects", projectRouter);
+app.use("/Final_year/certificates", certificateRouter);
 
 
 // deploymentstart
