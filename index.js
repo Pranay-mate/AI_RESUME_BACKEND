@@ -68,7 +68,6 @@ app.post('/create-pdf', (req, res) => {
 
 app.get('/fetch-pdf', (req, res) => {
   // console.log(req);
-  // console.log(res);
   res.sendFile('/result.pdf', { root: '.' });
 })
 
