@@ -91,10 +91,10 @@ dirname = path.resolve();
 
 
 // app.use(express.static('https://pranay-mate.github.io/Final_year');
-app.get('*', (req, res) => {
-  // console.log(pathName+'/client/build/index.html')
-  res.sendFile('https://pranay-mate.github.io/Final_year/index.html');
-});
+// app.get('*', (req, res) => {
+//   // console.log(pathName+'/client/build/index.html')
+//   res.sendFile('https://pranay-mate.github.io/Final_year/index.html');
+// });
 // app.get("*", function (req, res) {
 //   // res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private')
 //   res.sendFile(
