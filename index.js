@@ -88,24 +88,24 @@ app.use("/certificates", certificateRouter);
 global.dirname = '';
 dirname = path.resolve();
 // app.use(express.static(path.join(pathName,'/client/build')));
-// app.get('*', (req, res) => {
-//   console.log(pathName+'/client/build/index.html')
-//   res.sendFile(path.resolve(pathName,'client','build','index.html'));
-// });
 
 
-app.use(express.static(path.join(dirname, "client/build")));
-app.get("*", function (req, res) {
-  // res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private')
-  res.sendFile(
-    path.join(dirname, "./client/build", "index.html"),
-    function (err) {
-      if (err) {
-        res.status(500).send(err);
-      }
-    }
-  );
+app.use(express.static('https://pranay-mate.github.io/Final_year/index.html');
+app.get('*', (req, res) => {
+  // console.log(pathName+'/client/build/index.html')
+  res.sendFile('https://pranay-mate.github.io/Final_year/index.html');
 });
+// app.get("*", function (req, res) {
+//   // res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private')
+//   res.sendFile(
+//     path.join(dirname, "./client/build", "index.html"),
+//     function (err) {
+//       if (err) {
+//         res.status(500).send(err);
+//       }
+//     }
+//   );
+// });
 
 
 // deploymentend
