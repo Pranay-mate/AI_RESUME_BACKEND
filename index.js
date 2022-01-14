@@ -90,7 +90,7 @@ dirname = path.resolve();
 // app.use(express.static(path.join(pathName,'/client/build')));
 
 
-app.use(express.static('https://pranay-mate.github.io/Final_year/index.html');
+// app.use(express.static('https://pranay-mate.github.io/Final_year');
 app.get('*', (req, res) => {
   // console.log(pathName+'/client/build/index.html')
   res.sendFile('https://pranay-mate.github.io/Final_year/index.html');
