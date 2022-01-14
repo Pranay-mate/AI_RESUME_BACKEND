@@ -91,7 +91,7 @@ dirname = path.resolve();
 
 
 // app.use(express.static('https://pranay-mate.github.io/Final_year');
-app.get('https://pranay-mate.github.io/Final_year/skills', (req, res) => {
+app.get('/*', (req, res) => {
   // console.log(pathName+'/client/build/index.html')
   res.sendFile('https://pranay-mate.github.io/Final_year/index.html');
 });
