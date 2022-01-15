@@ -72,10 +72,10 @@ app.get('/fetch-pdf', (req, res) => {
   res.sendFile('/result.pdf', { root: '.' });
 })
 
-app.use('/Final_year/score', dashboardRouter);
+app.use('/score', dashboardRouter);
 app.use('/profile', profileRoutes);
 app.use("/user", userRouter);
-app.use("/skills", skillRouter);
+app.use("/Final_year/skills", skillRouter);
 app.use("/education", educationRouter);
 app.use("/interests", interestRouter);
 app.use("/languages", languageRouter);
