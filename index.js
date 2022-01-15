@@ -74,7 +74,7 @@ app.get('/fetch-pdf', (req, res) => {
 
 app.use('/Final_year/score', dashboardRouter);
 app.use('/Final_year/profile', profileRoutes);
-app.use("/Final_year/user", userRouter);
+app.use("/user", userRouter);
 app.use("/Final_year/skills", skillRouter);
 app.use("/Final_year/education", educationRouter);
 app.use("/Final_year/interests", interestRouter);
