@@ -7,6 +7,7 @@ import Projects from '../models/projects.js';
 import skills from '../models/skills.js';
 import Certificates from '../models/certificates.js'; 
 import Profiles from '../models/profiles.js';  
+import {WebhookClient} from 'dialogflow-fulfillment';
 
 export const getScore = async (req, res)=>{
     const { id } = req.params;
@@ -40,6 +41,73 @@ export const getScore = async (req, res)=>{
             }, 1000);
         //console.log(certificates)
         //res.status(200).json(certificates);
+    } catch (error) {
+        res.status(400).json({message: error.message});
+    }
+}
+
+
+export const getSkillsData = async (req, res)=>{
+    const { id } = req.params;
+    console.log(req.body)
+    var score = 0;
+    try {
+        
+        const agent = new WebhookClient({req, res});
+        console.log(agent)
+     
+
+        console.log('getskilldata')
+        const skillsD = await skills.find({userID: req.body.userId});
+        const existSkills = [];
+        let missingSkillCount = 0;
+        skillsD.forEach(skillObj => {
+            existSkills.push(skillObj.skill.toUpperCase());
+        });
+        let skillsMust = [];
+        switch (req.body.profile) {
+            case 1:
+                skillsMust = ['html','css','javascript','js'];
+            break;
+            case 2:
+                skillsMust = ['html','css','react'];
+            break;
+            case 3:
+                skillsMust = ['html','css','js'];
+            break;
+            case '4':
+                skillsMust = ['html','javascript','js'];
+            break;
+            default:
+                skillsMust = ['html'];
+            break;
+        }
+        console.log(skillsMust)
+        // let skillsMust = ['html','css','javascript','js'];
+        skillsMust.forEach(skill => {
+          if(existSkills.indexOf(skill.toUpperCase()) == -1){
+            missingSkillCount++;
+          }
+        });
+  
+        score = parseInt(skillsMust.length-missingSkillCount)/parseInt(skillsMust.length)*100;
+        console.log(score);
+
+        const pdfData = [];
+        const obj= {};
+        console.log('getskilldata')
+        // let skillsData = ['html','css','javascript','js'];
+        // if(id!='1'){
+            // skillsData = ['js'];
+        // }
+        
+        setTimeout(() => {
+            obj["skillsData"] = score;
+            pdfData.push(obj);
+            res.status(200).json(pdfData);
+        }, 1000);
+        // console.log(certificates)
+        // res.status(200).json(certificates);
     } catch (error) {
         res.status(400).json({message: error.message});
     }
