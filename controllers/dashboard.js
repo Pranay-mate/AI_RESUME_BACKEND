@@ -55,7 +55,6 @@ export const getSkillsData = async (req, res)=>{
         
         const agent = new WebhookClient({req, res});
         console.log(agent)
-     
 
         console.log('getskilldata')
         const skillsD = await skills.find({userID: req.body.userId});
