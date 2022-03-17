@@ -64,6 +64,10 @@ export const getSkillsData = async (req, res)=>{
             existSkills.push(skillObj.skill.toUpperCase());
         });
         let skillsMust = [];
+        
+        const a = tf.data.array([{'item': 1}, {'item': 2}, {'item': 3}]);
+        await a.forEachAsync(e => console.log(e));
+
         switch (req.body.profile) {
             case 1:
                 skillsMust = ['html','css','javascript','js'];
