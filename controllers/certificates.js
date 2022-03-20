@@ -15,7 +15,6 @@ export const getCertificates = async (req, res)=>{
 
 export const addCertificates = async (req, res)=>{
     const certificates = req.body;
-        // console.log('++++++++++'+certificates)
     const newCertificate = new Certificates(certificates);
     try {
         await newCertificate.save();
