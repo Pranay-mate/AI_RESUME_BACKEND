@@ -63,18 +63,17 @@ export const getSkillsData = async (req, res)=>{
         });
         let skillsMust = [];
         const a = tf.data.array([
-            { "1" : ["HTML","CSS","JavaScript","JQuery","Software Development","Object-Oriented Programming","Teamwork"]},
-            { "2" : ["HTML","CSS","JavaScript","JQuery","Responsive web design","SEO"]},
-            { "3" : ["HTML","CSS","JavaScript","JQuery","React","mongodb","node","express"]},
-            { "4" : ["HTML","CSS","JavaScript","JQuery","Angular","mongodb","node","express"]},
-            { "5" : ["HTML","CSS","JavaScript","Php","Laravel"]},
+            { "1" : ["HTML","CSS","JavaScript","Software Development","Object-Oriented Programming"]},
+            { "2" : ["HTML","CSS","JavaScript","Responsive design","SEO"]},
+            { "3" : ["HTML","CSS","JavaScript","React","mongodb","node","express"]},
+            { "5" : ["HTML","CSS","JavaScript","Angular","mongodb","node","express"]},
             { "6" : ["HTML","CSS","JavaScript","Php","Laravel"]},
             { "7" : ["Linux","Networking","Data storage","security"]},
             { "8" : ["Hardware","Software","SAP","Linux"]},
-            { "9" : ["JavaScript","Networking","JQuery","Analytical skills","Problem-solving","Linux"]},
+            { "9" : ["Networking","JQuery","Analytical skills","Problem-solving","Linux"]},
             { "11" : ["Time Management","Leadership","Risk Management","Critical Thinking","Problem Solving","Linux"]},
             { "12" : ["Linux","Hardware"]},
-            { "13" : ["HTML","CSS","JavaScript"]},
+            { "13" : ["HTML","CSS","Java"]},
             { "14" : ["Object-Oriented Programming","Java","Core java","version control"]},
             { "15" : ["Python","Linux","Machine Learning","Deep Learning","Mathematics","Programming","Statistics"]}
         ]);
