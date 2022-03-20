@@ -42,6 +42,8 @@ export const deleteLanguages = async (req, res)=>{
     // const certificates = req.body;
     if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('no certificates with id');
     const deleteLanguage = await Languages.findByIdAndRemove(id);
-    res.json(deleteLanguage);
+    const languages = await Languages.find({userID: id});
+    console.log(languages)
+    res.status(200).json(languages);
 
 }

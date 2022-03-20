@@ -41,11 +41,12 @@ export const updateCertificates = async (req, res)=>{
 
 export const deleteCertificates = async (req, res)=>{
     // console.log(req.params);
-    //  const { id} = req.params;
-    //  console.log(id);
+     const { id} = req.params;
+     console.log(id);
     // const certificates = req.body;
     if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('no certificates with id');
     const deleteCertificate = await Certificates.findByIdAndRemove(id);
-    res.json(deleteCertificate);
-
+    const certificates = await Certificates.find({userID: id});
+    // console.log(certificates)
+    res.status(200).json(certificates);
 }

@@ -47,6 +47,7 @@ export const deleteExperience = async (req, res)=>{
     // const certificates = req.body;
     if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('no certificates with id');
     const deleteExperience = await Experiences.findByIdAndRemove(id);
-    res.json(deleteExperience);
-
+    const experiences = await Experiences.find({userID: id});
+    console.log(experiences)
+    res.status(200).json(experiences);
 }

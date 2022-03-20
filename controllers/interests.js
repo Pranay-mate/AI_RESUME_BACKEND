@@ -45,6 +45,8 @@ export const deleteInterests = async (req, res)=>{
     // const certificates = req.body;
     if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('no certificates with id');
     const deleteInterest = await Interests.findByIdAndRemove(id);
-    res.json(deleteInterest);
+    const interests = await Interests.find({userID: id});
+    console.log(interests)
+    res.status(200).json(interests);
 
 }

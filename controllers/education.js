@@ -46,6 +46,7 @@ export const deleteEducation = async (req, res)=>{
     // const certificates = req.body;
     if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('no educations with id');
     const deleteEducation = await Educations.findByIdAndRemove(id);
-    res.json(deleteEducation);
-
+    const educations = await Educations.find({userID: id});
+    console.log(educations)
+    res.status(200).json(educations);
 }

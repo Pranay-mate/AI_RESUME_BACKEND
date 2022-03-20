@@ -50,6 +50,7 @@ export const deleteSkills = async (req, res)=>{
     if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('no skills with id');
     const deleteSkill = await skills.findByIdAndRemove(id);
     const Skills = await skills.find({userID: skill.skillId});
+    console.log(Skills)
     res.json(Skills);
     } catch (error) {
         res.status(409).json({message: error.message});

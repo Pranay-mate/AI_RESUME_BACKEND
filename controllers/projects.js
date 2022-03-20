@@ -43,6 +43,7 @@ export const deleteProjects = async (req, res)=>{
     // const certificates = req.body;
     if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('no project with id');
     const deleteproject = await Projects.findByIdAndRemove(id);
-    res.json(deleteproject);
-
+    const projects = await Projects.find({userID: id});
+    console.log(projects)
+    res.status(200).json(projects);
 }

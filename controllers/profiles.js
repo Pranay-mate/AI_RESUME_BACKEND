@@ -46,14 +46,21 @@ export const updateProfile = async (req, res)=>{
 }
 
 export const deleteProfile = async (req, res)=>{
-    console.log(req.params);
-     const { id} = req.params;
-     console.log(id);
-    // const certificates = req.body;
-    if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('no certificates with id');
-    const deleteProfile = await Profiles.findByIdAndRemove(id);
-    res.json(deleteProfile);
-
+    try {
+      // console.log(req.params);
+        const { id} = req.params;
+        const profile = {profileID: id};
+        console.log(id)
+        if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('no profile with id');
+        const deleteProfile = await Profiles.findByIdAndRemove(id);
+        // console.log(deleteProfile)
+        
+        const profiles = await Profiles.find({userID: id});
+        console.log(profiles)
+        res.status(200).json(profiles);
+      } catch (error) {
+          res.status(409).json({message: error.message});
+      }
 }
 
 export const reProfile = async (req,res)=>{

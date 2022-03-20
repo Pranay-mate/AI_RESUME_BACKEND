@@ -8,6 +8,7 @@ import skills from '../models/skills.js';
 import Certificates from '../models/certificates.js'; 
 import Profiles from '../models/profiles.js';  
 import {WebhookClient} from 'dialogflow-fulfillment';
+import tf from '@tensorflow/tfjs';
 
 export const getScore = async (req, res)=>{
     const { id } = req.params;
@@ -46,54 +47,60 @@ export const getScore = async (req, res)=>{
     }
 }
 
-
 export const getSkillsData = async (req, res)=>{
     const { id } = req.params;
     console.log(req.body)
     var score = 0;
     try {
         
-        const agent = new WebhookClient({req, res});
-        console.log(agent)
-
         console.log('getskilldata')
         const skillsD = await skills.find({userID: req.body.userId});
         const existSkills = [];
         let missingSkillCount = 0;
+        let RequiredSkills = [];
         skillsD.forEach(skillObj => {
             existSkills.push(skillObj.skill.toUpperCase());
         });
         let skillsMust = [];
-        const a = tf.data.array([{'item': 1}, {'item': 2}, {'item': 3}]);
-        await a.forEachAsync(e => console.log(e));
-
-        switch (req.body.profile) {
-            case 1:
-                skillsMust = ['html','css','javascript','js'];
-            break;
-            case 2:
-                skillsMust = ['html','css','react'];
-            break;
-            case 3:
-                skillsMust = ['html','css','js'];
-            break;
-            case '4':
-                skillsMust = ['html','javascript','js'];
-            break;
-            default:
-                skillsMust = ['html'];
-            break;
-        }
-        console.log(skillsMust)
-        // let skillsMust = ['html','css','javascript','js'];
-        skillsMust.forEach(skill => {
-          if(existSkills.indexOf(skill.toUpperCase()) == -1){
-            missingSkillCount++;
-          }
+        const a = tf.data.array([
+                                {'0':['html','css','javascript','js']},
+                                {'1':['html','anuglar','react']},
+                                {'2':['html','css']},
+                                {'3':['html','css','react']},
+                                {'4':['css','react']},
+                                {'5':['html','react']},
+                                {'6':['html']},
+                            ]);
+                                // a.forEachAsync(e => console.log(e));
+                                // const value = (await a.array())[0]
+        let dataFound = false;
+        await a.forEachAsync(e => {
+            if(typeof(e[req.body.profile]) != 'undefined'){
+                dataFound = true;
+                skillsMust = e[req.body.profile];
+            }
         });
-  
-        score = parseInt(skillsMust.length-missingSkillCount)/parseInt(skillsMust.length)*100;
-        console.log(score);
+    
+
+        if(dataFound == true){
+            skillsMust.forEach(skill => {
+              if(existSkills.indexOf(skill.toUpperCase()) == -1){
+                missingSkillCount++;
+                RequiredSkills.push(skill);
+              }
+            });
+      
+            score = parseInt(skillsMust.length-missingSkillCount)/parseInt(skillsMust.length)*100;
+            console.log("score")
+            console.log(score)
+        }else{
+            score = -1;
+            RequiredSkills = skillsMust;
+            console.log(score)
+        }
+
+
+        // console.log(score);score
 
         const pdfData = [];
         const obj= {};
@@ -105,7 +112,10 @@ export const getSkillsData = async (req, res)=>{
         
         setTimeout(() => {
             obj["skillsData"] = score;
+            obj["RequiredSkills"] = RequiredSkills;
+            obj["missingSkillCount"] = missingSkillCount;
             pdfData.push(obj);
+            console.log(pdfData)
             res.status(200).json(pdfData);
         }, 1000);
         // console.log(certificates)
