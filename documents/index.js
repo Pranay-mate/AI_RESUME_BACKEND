@@ -3,28 +3,29 @@
     //  console.log('pdf'+pdfData)
     let ExperiencesHtml = ``;
     pdfData.Experiences.forEach(experience => {
-       ExperiencesHtml+=`<section class="blocks">`;
-       ExperiencesHtml+=`<div class="date">`;
-         ExperiencesHtml+=`<span>`+experience.SDate+`</span> - <span>`+experience.EDate+`</span>`;
-       ExperiencesHtml+=`</div>`;
-       ExperiencesHtml+=`<div class="decorator">`;
-       ExperiencesHtml+=`</div>`;
-       ExperiencesHtml+=`<div class="details">`;
-        ExperiencesHtml+=` <header>`;
-           ExperiencesHtml+=`<h3>`+experience.Title+`</h3>`;
-           ExperiencesHtml+=`<span class="place">`+experience.Workplace+`</span>`;
-           ExperiencesHtml+=`<span class="location">`+experience.WorkplaceAdd+`</span>`;
-         ExperiencesHtml+=`</header>`;
-        //  ExperiencesHtml+=`<div>`;
-        //   ExperiencesHtml+=` <ul>`;
-        //     ExperiencesHtml+=` <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit</li>`;
-        //     ExperiencesHtml+=` <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nec mi ante. Etiam odio eros, placerat eu metus id, gravida eleifend odio. Vestibulum dapibus pharetra odio, egestas ullamcorper ipsum congue ac. Maecenas viverra tortor eget convallis vestibulum. Donec pulvinar venenatis est, non sollicitudin metus laoreet sed. Fusce tincidunt felis nec neque aliquet porttitor</li>`;
-        //    ExperiencesHtml+=`</ul>`;
-        //    ExperiencesHtml+=`</div>`;
-       ExperiencesHtml+=`</div>`;
-     ExperiencesHtml+=`</section>`;
+      ExperiencesHtml+=`<section class="blocks">`;
+      ExperiencesHtml+=`<div class="date">`;
+      ExperiencesHtml+=`<span>`+experience.SDate+`</span> - <span>`+experience.EDate+`</span>`;
+      ExperiencesHtml+=`</div>`;
+      ExperiencesHtml+=`<div class="decorator">`;
+      ExperiencesHtml+=`</div>`;
+      ExperiencesHtml+=`<div class="details">`;
+      ExperiencesHtml+=` <header>`;
+      ExperiencesHtml+=`<h3>`+experience.Title+`</h3>`;
+      ExperiencesHtml+=`<span class="place">`+experience.Workplace+`</span>`;
+      ExperiencesHtml+=`<span class="location">`+experience.WorkplaceAdd+`</span>`;
+      ExperiencesHtml+=`</header>`;
+      //  ExperiencesHtml+=`<div>`;
+      //   ExperiencesHtml+=` <ul>`;
+      //     ExperiencesHtml+=` <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit</li>`;
+      //     ExperiencesHtml+=` <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nec mi ante. Etiam odio eros, placerat eu metus id, gravida eleifend odio. Vestibulum dapibus pharetra odio, egestas ullamcorper ipsum congue ac. Maecenas viverra tortor eget convallis vestibulum. Donec pulvinar venenatis est, non sollicitudin metus laoreet sed. Fusce tincidunt felis nec neque aliquet porttitor</li>`;
+      //    ExperiencesHtml+=`</ul>`;
+      //    ExperiencesHtml+=`</div>`;
+      ExperiencesHtml+=`</div>`;
+      ExperiencesHtml+=`</section>`;
     });
-
+    let ExperienceHeader = pdfData.Experiences.length > 0 ?`<section class="main-block concise"><h2><i class="fa fa-suitcase"></i> Experience </h2>`+ExperiencesHtml+`</section><hr style={{ color: 'red' }}></hr>`: '';
+    
     let ProjectsHtml = ``;
     pdfData.Projects.forEach(project => {
       ProjectsHtml+=`<section class="blocks">`;
@@ -46,7 +47,8 @@
       ProjectsHtml+=`</div>`;
       ProjectsHtml+=`</section>`;
     });
-
+    let ProjectsHeader = pdfData.Projects.length > 0 ?`<section class="main-block"><h2><i class="fa fa-folder-open"></i> Projects</h2>`+ProjectsHtml+`</section><hr style={{ color: 'red' }}></hr>`: '';
+    
     let EducationsHtml = ``;
     pdfData.Educations.forEach(education => {
       EducationsHtml+=`<section class="blocks">`;
@@ -65,16 +67,18 @@
       EducationsHtml+=`    </div>`;
       EducationsHtml+=`  </section>`;
     });
-
+    let EducationsHeader = pdfData.Educations.length > 0 ?` <section class="main-block concise"><h2><i class="fa fa-graduation-cap"></i> Education</h2>`+EducationsHtml+`</section><hr style={{ color: 'red' }}></hr>`: '';
+    
     let EmailId = (pdfData.Profiles[0].EmailId != null) ? `<li><i class="fa fa-envelope"></i>`+pdfData.Profiles[0].EmailId+`</li>` : null;
     let ContactNumber =( pdfData.Profiles[0].EmailId != null) ? `<li><i class="fa fa-phone"></i>`+ pdfData.Profiles[0].ContactNumber+`</li>` : null;
-
+    
     let skillsHtml = ``;
     pdfData.Skills.forEach(skill => {
       skillsHtml +=`<li>`+skill.skill+`</li>`;
     });
-
-return `
+    let skillsHeader = pdfData.Skills.length > 0 ?`<div class="side-block" id="skills"><h1>Skills</h1>`+skillsHtml+`</div>`: '';
+    
+    return `
     <!doctype html>
     <html>
        <head>
@@ -90,29 +94,10 @@ return `
 
        </header>
        <hr style={{ color: 'red' }}></hr>
-       <section class="main-block concise">
-       <h2>
-          <i class="fa fa-suitcase"></i> Experience
-        </h2>
-        `+ExperiencesHtml+`
-
-      </section>
-      <hr style={{ color: 'red' }}></hr>
-       <section class="main-block">
-         <h2>
-           <i class="fa fa-folder-open"></i> Projects
-         </h2>
-         `+ProjectsHtml+`
-         </section>
-      <hr style={{ color: 'red' }}></hr>
-
-       <section class="main-block concise">
-         <h2>
-           <i class="fa fa-graduation-cap"></i> Education
-         </h2>
-         `+EducationsHtml+`
-       </section>
-      <hr style={{ color: 'red' }}></hr>
+       
+        `+ExperienceHeader+`
+        `+ProjectsHeader+`
+        `+EducationsHeader+`
        
      <aside id="sidebar">
        <div class="side-block" id="contact">
@@ -125,13 +110,7 @@ return `
          </ul>
        </div>
       <hr style={{ color: 'red' }}></hr>
-
-       <div class="side-block" id="skills">
-         <h1>
-           Skills
-         </h1>
-         `+skillsHtml+`
-       </div>
+         `+skillsHeader+`
      </aside>
        </div>
        </body>

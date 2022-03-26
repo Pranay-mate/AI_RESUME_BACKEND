@@ -77,8 +77,6 @@ export const getSkillsData = async (req, res)=>{
             { "14" : ["Object-Oriented Programming","Java","Core java","version control"]},
             { "15" : ["Python","Linux","Machine Learning","Deep Learning","Mathematics","Programming","Statistics"]}
         ]);
-                                // a.forEachAsync(e => console.log(e));
-                                // const value = (await a.array())[0]
         let dataFound = false;
         await a.forEachAsync(e => {
             if(typeof(e[req.body.profile]) != 'undefined'){
@@ -105,16 +103,9 @@ export const getSkillsData = async (req, res)=>{
             console.log(score)
         }
 
-
-        // console.log(score);score
-
         const pdfData = [];
         const obj= {};
         console.log('getskilldata')
-        // let skillsData = ['html','css','javascript','js'];
-        // if(id!='1'){
-            // skillsData = ['js'];
-        // }
         
         setTimeout(() => {
             obj["skillsData"] = score;
@@ -124,8 +115,6 @@ export const getSkillsData = async (req, res)=>{
             console.log(pdfData)
             res.status(200).json(pdfData);
         }, 1000);
-        // console.log(certificates)
-        // res.status(200).json(certificates);
     } catch (error) {
         res.status(400).json({message: error.message});
     }
